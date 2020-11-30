@@ -1,0 +1,55 @@
+---
+title: "A Pilot Oncology Drug Classifications"
+output:
+  html_document:
+    df_print: paged
+---
+
+Drug Classification Challenges: 
+- Clinically relevant classification for data collection and analysis purposes  
+- Interoperability across consortia, including ASCO   
+- 
+
+
+```{r cellular_therapy,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/cellular_therapy.html")  
+```  
+     
+```{r cytotoxic_chemotherapy,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/cytotoxic_chemotherapy.html")  
+```  
+                
+                
+```{r endocrine_therapy,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/endocrine_therapy.html")  
+```  
+                
+                
+```{r antibody_drug_conjugates,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/antibody_drug_conjugates.html")  
+```  
+                
+                
+```{r checkpoint_inhibitors,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/checkpoint_inhibitors.html")  
+```  
+                
+                
+```{r immunomodulators_and_immunostimulants,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/immunomodulators_and_immunostimulants.html")  
+```  
+                
+                
+```{r monoclonal_antibody_targeted_therapy,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/monoclonal_antibody_targeted_therapy.html")  
+```  
+                
+                
+```{r other_immunotherapy,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/other_immunotherapy.html")  
+```  
+                
+                
+```{r intravesicular_therapy,echo=FALSE,eval=TRUE}  
+htmltools::includeHTML("_site/intravesicular_therapy.html")  
+```  
