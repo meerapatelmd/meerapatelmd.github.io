@@ -1,17 +1,14 @@
 ---
-title: "Primary Template"
-author: "Meera Y. Patel, M.D."
-date: "`r Sys.Date()`"
+title: "Welcome to My Page!"
 output: 
   html_document:
     theme: flatly
     highlight: kate  
     toc: yes
-    number_sections: true
     toc_depth: 3 
     toc_float: 
-      collapsed: false  
-      smooth_scroll: false
+      collapsed: false 
+      smooth_scroll: true
     code_folding: show #or hide
     df_print: paged
     fig_height: 5 
@@ -40,30 +37,32 @@ knitr::opts_chunk$set(echo = TRUE,
                       )
 ```
   
-  
-## Introduction  
+Last updated: `r Sys.Date()`  
 
-Themes can be viewed at: https://bootswatch.com/3/.  
+## About Me  
 
-Syntax Highlighting Styles can be viewed at https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/.  
+[![Linkedin Badge](https://img.shields.io/badge/-meerapatelmd-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/meera-patel-md/)](https://www.linkedin.com/in/meera-patel-md/) [![Medium Badge](https://img.shields.io/badge/-@meerapatelmd-000000?style=flat&labelColor=000000&logo=Medium&link=https://medium.com/@meerapatelmd)](https://medium.com/@meerapatelmd) [![Gmail Badge](https://img.shields.io/badge/-patelmeeray-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:patelmeeray@gmail.com)](mailto:patelmeeray@gmail.com)  
 
-Dataframe printing options include `default`, `kable`, `tibble`, or `paged`.  
+I am a Physician and Informatician that is living the dream in New York City. I 
+love everything data and moreso if it is clinical data. Hope you enjoy poking 
+around my portfolio - some interactive projects such as the [The HemOnc Ontology](##the-hemonc-ontology) and [Cancer Drug Classifications](##cancer-drug-cassifications) are particularly fun to click around. 
 
-For paged dataframes, the chunk options include:  
-
-* max.print: the number of rows to print  
-* rows.print: the number of rows to display    
-* cols.print: the number of columns to print  
-* cols.min.print: the minimum number of columns to display  
-* pages.print: the number of pages to display under page navigation   
-* paged.print: when set to `FALSE` turns off paged display for the chunk    
-* rownames.print: when set to `FALSE` turns off row names for the chunk  
+Feel free to contact me with any questions. 
 
 
+## Portfolio   
 
+### Projects  
 
-  
-## Analysis  
-  
-## Conclusions  
+#### The HemOnc Ontology  
+Link: https://meerapatelmd.github.io/projects/hemonc_ontology/index.html  
+
+#### Cancer Drug Classifications 
+
+### Presentations  
+
+### Research  
+
+### Repo  
+
   

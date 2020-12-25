@@ -42,7 +42,7 @@ knitr::opts_chunk$set(echo = TRUE,
   
 ## Introduction  
 
-## HemOnc Reingold-Tilford Tree Diagram 
+## Reingold-Tilford Tree Diagram 
 
 ```{r,echo=FALSE}
 htmltools::includeHTML('widgets/HemOnc.html')
