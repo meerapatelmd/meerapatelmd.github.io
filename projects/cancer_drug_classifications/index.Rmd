@@ -1,7 +1,6 @@
 ---
 title: "Cancer Drug Classifications"
 author: "Meera Y. Patel, M.D."
-date: "`r Sys.Date()`"
 output: 
   html_document:
     theme: flatly
@@ -40,6 +39,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       )
 ```
   
+Last updated: `r Sys.Date()`  
   
 ## Introduction  
 
