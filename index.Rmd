@@ -9,7 +9,6 @@ output:
     toc_float: 
       collapsed: false 
       smooth_scroll: true
-    code_folding: show #or hide
     df_print: paged
     fig_height: 5 
     fig_width: 7 
@@ -45,7 +44,7 @@ Last updated: `r Sys.Date()`
 
 I am a Physician and Informatician that is living the dream in New York City. I 
 love everything data and moreso if it is clinical data. Hope you enjoy poking 
-around my portfolio - some interactive projects such as the [The HemOnc Ontology](#the-hemonc-ontology) and [Cancer Drug Classifications](#cancer-drug-cassifications) are particularly fun to click around. 
+around my portfolio - some interactive projects such as the [The HemOnc Ontology](#the-hemonc-ontology) and [Cancer Drug Classifications](#cancer-drug-classifications) are particularly fun to click around. 
 
 Feel free to contact me with any questions. 
 
@@ -58,16 +57,22 @@ Feel free to contact me with any questions.
 https://meerapatelmd.github.io/projects/hemonc_ontology/    
 HemOnc is an oncology drug ontology developed by Vanderbilt University. The nodes and edges in this ontology closely resemble the way both cancer-related and non-cancer-related treatments are applied in clinical practice. This project provides a brief introduction and visualization of the taxonomy portion of the ontology.  
   
-#### Cancer Drug Classifications {#cancer-drug-cassifications}   
+#### Cancer Drug Classifications {#cancer-drug-classifications}   
 https://meerapatelmd.github.io/projects/cancer_drug_classifications/   
 Due to their inherent multifaceted nature, drugs can be classified in a multitude of ways for a given use case. For example, a pharmacist and a pharmacologist would likely create very different ontologies of the drug domain due to their differing vantage points. In 
 the Oncology Drug domain specifically, there is yet to be a classification system 
 reflective of the drug categorizations following ASCO treatment guidelines and that of other oncology consortia. Having such a classification would enable the interoperability of cancer treatment data between institutions for situations such as transfer of care and automated
-identification of specific treatment lines and treatment history to optimize assessments for clinical trial eligibility.  
+identification of specific treatment lines and treatment history to optimize assessments for clinical trial eligibility.   
+
 
 ### Presentations  
 
-### Research  
+### Research {#research}   
+
+#### A Novel Weighted Psychosocial Assessment Scoring System for Kidney Transplant Evaluation   
+https://meerapatelmd.github.io/projects/qualitative_kidney_transplant_study/poster.pdf   
+Qualification for the organ transplant list requires clearance from a social workers that assesses that patient's social determinants of health and other qualitative factors for transplant suitability. With concerns that the process was fraught with unintentional and intentional bias, a social work fellow and I conducted a study that created a scoring system for social workers to use to introduce objectivity to the assessment process.   
+
 
 ### Repo  
 

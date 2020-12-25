@@ -1280,66 +1280,6 @@ window.buildTabsets = function(tocID) {
 };
 
 </script>
-<script>
-window.initializeCodeFolding = function(show) {
-
-  // handlers for show-all and hide all
-  $("#rmd-show-all-code").click(function() {
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('show');
-    });
-  });
-  $("#rmd-hide-all-code").click(function() {
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('hide');
-    });
-  });
-
-  // index for unique code element ids
-  var currentIndex = 1;
-
-  // select all R code blocks
-  var rCodeBlocks = $('pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.julia, pre.foldable');
-  rCodeBlocks.each(function() {
-
-    // create a collapsable div to wrap the code in
-    var div = $('<div class="collapse r-code-collapse"></div>');
-    var showThis = (show || $(this).hasClass('fold-show')) && !$(this).hasClass('fold-hide');
-    if (showThis) div.addClass('in');
-    var id = 'rcode-643E0F36' + currentIndex++;
-    div.attr('id', id);
-    $(this).before(div);
-    $(this).detach().appendTo(div);
-
-    // add a show code button right above
-    var showCodeText = $('<span>' + (showThis ? 'Hide' : 'Code') + '</span>');
-    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
-    showCodeButton.append(showCodeText);
-    showCodeButton
-        .attr('data-toggle', 'collapse')
-        .attr('data-target', '#' + id)
-        .attr('aria-expanded', showThis)
-        .attr('aria-controls', id);
-
-    var buttonRow = $('<div class="row"></div>');
-    var buttonCol = $('<div class="col-md-12"></div>');
-
-    buttonCol.append(showCodeButton);
-    buttonRow.append(buttonCol);
-
-    div.before(buttonRow);
-
-    // update state of button on show/hide
-    div.on('hidden.bs.collapse', function () {
-      showCodeText.text('Code');
-    });
-    div.on('show.bs.collapse', function () {
-      showCodeText.text('Hide');
-    });
-  });
-
-}
-</script>
 <script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
 // v0.0.1
 // Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
@@ -2758,9 +2698,6 @@ summary {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -2856,14 +2793,6 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Welcome to My Page!</h1>
@@ -2871,11 +2800,11 @@ div.tocify {
 </div>
 
 
-<p>Last updated: 2020-12-24</p>
+<p>Last updated: 2020-12-25</p>
 <div id="about-me" class="section level2">
 <h2>About Me</h2>
 <p><a href="https://www.linkedin.com/in/meera-patel-md/"><img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTA5IiBoZWlnaHQ9IjIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Im1lZXJhcGF0ZWxtZCI+PHRpdGxlPm1lZXJhcGF0ZWxtZDwvdGl0bGU+PGEgdGFyZ2V0PSJfYmxhbmsiIHhsaW5rOmhyZWY9Imh0dHBzOi8vd3d3LmxpbmtlZGluLmNvbS9pbi9tZWVyYS1wYXRlbC1tZC8iPjxsaW5lYXJHcmFkaWVudCBpZD0icyIgeDI9IjAiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9IjEwOSIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmYiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3Qgd2lkdGg9IjAiIGhlaWdodD0iMjAiIGZpbGw9IiM1NTUiLz48cmVjdCB4PSIwIiB3aWR0aD0iMTA5IiBoZWlnaHQ9IjIwIiBmaWxsPSIjMDA3ZWM2Ii8+PHJlY3Qgd2lkdGg9IjEwOSIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgdGV4dC1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiIgZm9udC1zaXplPSIxMTAiPjxpbWFnZSB4PSI1IiB5PSIzIiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5Qm1hV3hzUFNKM2FHbDBaU0lnY205c1pUMGlhVzFuSWlCMmFXVjNRbTk0UFNJd0lEQWdNalFnTWpRaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BIUnBkR3hsUGt4cGJtdGxaRWx1SUdsamIyNDhMM1JwZEd4bFBqeHdZWFJvSUdROUlrMHlNQzQwTkRjZ01qQXVORFV5YUMwekxqVTFOSFl0TlM0MU5qbGpNQzB4TGpNeU9DMHVNREkzTFRNdU1ETTNMVEV1T0RVeUxUTXVNRE0zTFRFdU9EVXpJREF0TWk0eE16WWdNUzQwTkRVdE1pNHhNellnTWk0NU16bDJOUzQyTmpkSU9TNHpOVEZXT1dnekxqUXhOSFl4TGpVMk1XZ3VNRFEyWXk0ME56Y3RMamtnTVM0Mk16Y3RNUzQ0TlNBekxqTTNMVEV1T0RVZ015NDJNREVnTUNBMExqSTJOeUF5TGpNM0lEUXVNalkzSURVdU5EVTFkall1TWpnMmVrMDFMak16TnlBM0xqUXpNMk10TVM0eE5EUWdNQzB5TGpBMk15MHVPVEkyTFRJdU1EWXpMVEl1TURZMUlEQXRNUzR4TXpndU9USXRNaTR3TmpNZ01pNHdOak10TWk0d05qTWdNUzR4TkNBd0lESXVNRFkwTGpreU5TQXlMakEyTkNBeUxqQTJNeUF3SURFdU1UTTVMUzQ1TWpVZ01pNHdOalV0TWk0d05qUWdNaTR3TmpWNmJURXVOemd5SURFekxqQXhPVWd6TGpVMU5WWTVhRE11TlRZMGRqRXhMalExTW5wTk1qSXVNakkxSURCSU1TNDNOekZETGpjNU1pQXdJREFnTGpjM05DQXdJREV1TnpJNWRqSXdMalUwTWtNd0lESXpMakl5Tnk0M09USWdNalFnTVM0M056RWdNalJvTWpBdU5EVXhRekl6TGpJZ01qUWdNalFnTWpNdU1qSTNJREkwSURJeUxqSTNNVll4TGpjeU9VTXlOQ0F1TnpjMElESXpMaklnTUNBeU1pNHlNaklnTUdndU1EQXplaUl2UGp3dmMzWm5QZz09Ii8+PHRleHQgYXJpYS1oaWRkZW49InRydWUiIHg9IjYzNSIgeT0iMTUwIiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iODEwIj5tZWVyYXBhdGVsbWQ8L3RleHQ+PHRleHQgeD0iNjM1IiB5PSIxNDAiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiBmaWxsPSIjZmZmIiB0ZXh0TGVuZ3RoPSI4MTAiPm1lZXJhcGF0ZWxtZDwvdGV4dD48L2c+PC9hPjwvc3ZnPg==" alt="Linkedin Badge" /></a> <a href="https://medium.com/@meerapatelmd"><img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI1IiBoZWlnaHQ9IjIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkBtZWVyYXBhdGVsbWQiPjx0aXRsZT5AbWVlcmFwYXRlbG1kPC90aXRsZT48YSB0YXJnZXQ9Il9ibGFuayIgeGxpbms6aHJlZj0iaHR0cHM6Ly9tZWRpdW0uY29tL0BtZWVyYXBhdGVsbWQiPjxsaW5lYXJHcmFkaWVudCBpZD0icyIgeDI9IjAiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9IjEyNSIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmYiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjIwIiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjQiIHdpZHRoPSIxMDEiIGhlaWdodD0iMjAiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB3aWR0aD0iMTI1IiBoZWlnaHQ9IjIwIiBmaWxsPSJ1cmwoI3MpIi8+PC9nPjxnIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJWZXJkYW5hLEdlbmV2YSxEZWphVnUgU2FucyxzYW5zLXNlcmlmIiB0ZXh0LXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBmb250LXNpemU9IjExMCI+PGltYWdlIHg9IjUiIHk9IjMiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCbWFXeHNQU0ozYUdsMFpYTnRiMnRsSWlCeWIyeGxQU0pwYldjaUlIWnBaWGRDYjNnOUlqQWdNQ0F5TkNBeU5DSWdlRzFzYm5NOUltaDBkSEE2THk5M2QzY3Vkek11YjNKbkx6SXdNREF2YzNabklqNDhkR2wwYkdVK1RXVmthWFZ0SUdsamIyNDhMM1JwZEd4bFBqeHdZWFJvSUdROUlrMHdJREIyTWpSb01qUldNRWd3ZW0weE9TNDVNemdnTlM0Mk9EWk1NVGd1TmpVeElEWXVPVEpoTGpNM05pNHpOellnTUNBd0lEQXRMakUwTXk0ek5qSjJPUzR3TmpkaExqTTNOaTR6TnpZZ01DQXdJREFnTGpFME15NHpOakZzTVM0eU5UY2dNUzR5TXpSMkxqSTNNV2d0Tmk0ek1qSjJMUzR5TjJ3eExqTXdNaTB4TGpJMk5XTXVNVEk0TFM0eE1qZ3VNVEk0TFM0eE5qVXVNVEk0TFM0ek5sWTRMams1YkMwekxqWXlJRGt1TVRrMWFDMHVORGxNTmk0Mk9TQTRMams1ZGpZdU1UWXpZUzQ0TlM0NE5TQXdJREFnTUNBdU1qTXpMamN3TjJ3eExqWTVOQ0F5TGpBMU5IWXVNamN4U0RNdU9ERTFkaTB1TWpkTU5TNDFNU0F4TlM0NE5tRXVPREl1T0RJZ01DQXdJREFnTGpJeE9DMHVOekEzVmpndU1ESTNZUzQyTWpRdU5qSTBJREFnTUNBd0xTNHlNRE10TGpVeU4wdzBMakF4T1NBMUxqWTRObll0TGpJM2FEUXVOamMwYkRNdU5qRXpJRGN1T1RJeklETXVNVGMyTFRjdU9USTBhRFF1TkRVMmRpNHlOekY2SWk4K1BDOXpkbWMrIi8+PHRleHQgYXJpYS1oaWRkZW49InRydWUiIHg9IjczNSIgeT0iMTUwIiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iOTEwIj5AbWVlcmFwYXRlbG1kPC90ZXh0Pjx0ZXh0IHg9IjczNSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgZmlsbD0iI2ZmZiIgdGV4dExlbmd0aD0iOTEwIj5AbWVlcmFwYXRlbG1kPC90ZXh0PjwvZz48L2E+PC9zdmc+" alt="Medium Badge" /></a> <a href="mailto:patelmeeray@gmail.com"><img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOTciIGhlaWdodD0iMjAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0icGF0ZWxtZWVyYXkiPjx0aXRsZT5wYXRlbG1lZXJheTwvdGl0bGU+PGEgdGFyZ2V0PSJfYmxhbmsiIHhsaW5rOmhyZWY9Im1haWx0bzpwYXRlbG1lZXJheUBnbWFpbC5jb20iPjxsaW5lYXJHcmFkaWVudCBpZD0icyIgeDI9IjAiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9Ijk3IiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI3IpIj48cmVjdCB3aWR0aD0iMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzU1NSIvPjxyZWN0IHg9IjAiIHdpZHRoPSI5NyIgaGVpZ2h0PSIyMCIgZmlsbD0iI2MxNDQzOCIvPjxyZWN0IHdpZHRoPSI5NyIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgdGV4dC1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiIgZm9udC1zaXplPSIxMTAiPjxpbWFnZSB4PSI1IiB5PSIzIiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5Qm1hV3hzUFNKM2FHbDBaU0lnY205c1pUMGlhVzFuSWlCMmFXVjNRbTk0UFNJd0lEQWdNalFnTWpRaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BIUnBkR3hsUGtkdFlXbHNJR2xqYjI0OEwzUnBkR3hsUGp4d1lYUm9JR1E5SWsweU5DQTBMalYyTVRWak1DQXVPRFV0TGpZMUlERXVOUzB4TGpVZ01TNDFTREl4VmpjdU16ZzNiQzA1SURZdU5EWXpMVGt0Tmk0ME5qTldNakZJTVM0MVF5NDJORGtnTWpFZ01DQXlNQzR6TlNBd0lERTVMalYyTFRFMVl6QXRMalF5TlM0eE5qSXRMamd1TkRNeExURXVNRFk0UXk0M0lETXVNVFlnTVM0d056WWdNeUF4TGpVZ00wZ3liREV3SURjdU1qVk1NaklnTTJndU5XTXVOREkxSURBZ0xqZ3VNVFl5SURFdU1EWTVMalF6TWk0eU55NHlOamd1TkRNeExqWTBNeTQwTXpFZ01TNHdOamg2SWk4K1BDOXpkbWMrIi8+PHRleHQgYXJpYS1oaWRkZW49InRydWUiIHg9IjU3NSIgeT0iMTUwIiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iNjkwIj5wYXRlbG1lZXJheTwvdGV4dD48dGV4dCB4PSI1NzUiIHk9IjE0MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIGZpbGw9IiNmZmYiIHRleHRMZW5ndGg9IjY5MCI+cGF0ZWxtZWVyYXk8L3RleHQ+PC9nPjwvYT48L3N2Zz4=" alt="Gmail Badge" /></a></p>
-<p>I am a Physician and Informatician that is living the dream in New York City. I love everything data and moreso if it is clinical data. Hope you enjoy poking around my portfolio - some interactive projects such as the <a href="#the-hemonc-ontology">The HemOnc Ontology</a> and <a href="#cancer-drug-cassifications">Cancer Drug Classifications</a> are particularly fun to click around.</p>
+<p>I am a Physician and Informatician that is living the dream in New York City. I love everything data and moreso if it is clinical data. Hope you enjoy poking around my portfolio - some interactive projects such as the <a href="#the-hemonc-ontology">The HemOnc Ontology</a> and <a href="#cancer-drug-classifications">Cancer Drug Classifications</a> are particularly fun to click around.</p>
 <p>Feel free to contact me with any questions.</p>
 </div>
 <div id="portfolio" class="section level2">
@@ -2887,7 +2816,7 @@ div.tocify {
 <p><a href="https://meerapatelmd.github.io/projects/hemonc_ontology/" class="uri">https://meerapatelmd.github.io/projects/hemonc_ontology/</a><br />
 HemOnc is an oncology drug ontology developed by Vanderbilt University. The nodes and edges in this ontology closely resemble the way both cancer-related and non-cancer-related treatments are applied in clinical practice. This project provides a brief introduction and visualization of the taxonomy portion of the ontology.</p>
 </div>
-<div id="cancer-drug-cassifications" class="section level4">
+<div id="cancer-drug-classifications" class="section level4">
 <h4>Cancer Drug Classifications</h4>
 <p><a href="https://meerapatelmd.github.io/projects/cancer_drug_classifications/" class="uri">https://meerapatelmd.github.io/projects/cancer_drug_classifications/</a><br />
 Due to their inherent multifaceted nature, drugs can be classified in a multitude of ways for a given use case. For example, a pharmacist and a pharmacologist would likely create very different ontologies of the drug domain due to their differing vantage points. In the Oncology Drug domain specifically, there is yet to be a classification system reflective of the drug categorizations following ASCO treatment guidelines and that of other oncology consortia. Having such a classification would enable the interoperability of cancer treatment data between institutions for situations such as transfer of care and automated identification of specific treatment lines and treatment history to optimize assessments for clinical trial eligibility.</p>
@@ -2898,6 +2827,11 @@ Due to their inherent multifaceted nature, drugs can be classified in a multitud
 </div>
 <div id="research" class="section level3">
 <h3>Research</h3>
+<div id="a-novel-weighted-psychosocial-assessment-scoring-system-for-kidney-transplant-evaluation" class="section level4">
+<h4>A Novel Weighted Psychosocial Assessment Scoring System for Kidney Transplant Evaluation</h4>
+<p><a href="https://meerapatelmd.github.io/projects/qualitative_kidney_transplant_study/poster.pdf" class="uri">https://meerapatelmd.github.io/projects/qualitative_kidney_transplant_study/poster.pdf</a><br />
+Qualification for the organ transplant list requires clearance from a social workers that assesses that patient’s social determinants of health and other qualitative factors for transplant suitability. With concerns that the process was fraught with unintentional and intentional bias, a social work fellow and I conducted a study that created a scoring system for social workers to use to introduce objectivity to the assessment process.</p>
+</div>
 </div>
 <div id="repo" class="section level3">
 <h3>Repo</h3>
@@ -2939,11 +2873,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 <script>
 $(document).ready(function ()  {
