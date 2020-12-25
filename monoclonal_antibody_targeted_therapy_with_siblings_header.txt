@@ -1,1 +1,0 @@
-document.write('<left><h1>Monoclonal Antibody Targeted Therapy: With Siblings</font></h1></left>')
