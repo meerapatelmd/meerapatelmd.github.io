@@ -1,0 +1,224 @@
+---
+title: "Cancer Drug Classifications"
+author: "Meera Y. Patel, M.D."
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: kate  
+    toc: yes
+    number_sections: true
+    toc_depth: 3 
+    toc_float: 
+      collapsed: false  
+      smooth_scroll: false
+    code_folding: show #or hide
+    df_print: paged
+    fig_height: 5 
+    fig_width: 7 
+    fig_caption: true
+    dev: png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      cache = TRUE,
+                      cache.path = "cache",
+                      child = NULL, #file/s to knit and then include,
+                      collapse = FALSE, #collapse all output into a single block,
+                      error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
+                      fig.align = "center", #left, right, center, or default
+                      include = TRUE, #include chunk?
+                      message = TRUE, #display code messages?
+                      tidy = TRUE, #tidy code 
+                      warning = TRUE, #include warnings?
+                      results = "markup"
+                        # "asis": passthrough results
+                        # "hide": do not display results 
+                        # "hold": put all results below all code
+                      )
+```
+  
+  
+## Introduction  
+
+Drug Classification Challenges:  
+
+- Clinically relevant classification for data collection and analysis purposes   
+- Interoperability across consortia, including ASCO   
+
+
+
+
+## Reingold-Tilford Tree Diagrams  
+
+### Antibody Drug Conjugates  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_ANTIBODY_DRUG_CONJUGATE_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_ANTIBODY_DRUG_CONJUGATE_with_siblings.html')
+```
+
+
+
+### Cellular Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CELLULAR_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CELLULAR_THERAPY_with_siblings.html')
+```
+
+
+
+### Checkpoint Inhibitors  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_CHECKPOINT_INHIBITOR_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_CHECKPOINT_INHIBITOR_with_siblings.html')
+```
+
+
+
+### Cytotoxic Chemotherapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CYTOTOXIC_CHEMOTHERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CYTOTOXIC_CHEMOTHERAPY_with_siblings.html')
+```
+
+
+
+### Endocrine Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/ENDOCRINE_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/ENDOCRINE_THERAPY_with_siblings.html')
+```
+
+
+
+### Immunomodulators and Immunostimulants  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_IMMUNOMODULATOR_AND_IMMUNOSTIMULANTS_EXCLUDING_IMMUNOSUPPRESSANTS_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_IMMUNOMODULATOR_AND_IMMUNOSTIMULANTS_EXCLUDING_IMMUNOSUPPRESSANTS_with_siblings.html')
+```
+
+
+
+### Intravesicular Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/INTRAVESICULAR_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/INTRAVESICULAR_THERAPY_with_siblings.html')
+```
+
+
+
+### Monoclonal Antibody Targeted Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_MONOCLONAL_ANTIBODY_TARGETED_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_MONOCLONAL_ANTIBODY_TARGETED_THERAPY_with_siblings.html')
+```
+
+
+
+### Other Immunotherapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_OTHER_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_OTHER_with_siblings.html')
+```
+
