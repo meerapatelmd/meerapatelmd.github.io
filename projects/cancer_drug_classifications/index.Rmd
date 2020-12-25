@@ -23,8 +23,8 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       eval = TRUE,
-                      cache = TRUE,
-                      cache.path = "cache",
+                      cache = FALSE,
+                      cache.path = "cache/",
                       child = NULL, #file/s to knit and then include,
                       collapse = FALSE, #collapse all output into a single block,
                       error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
