@@ -45,7 +45,8 @@ Last updated: `r Sys.Date()`
 
 Drug Classification Challenges:  
 
-- Clinically relevant classification for data collection and analysis purposes   
+- A Clinically relevant classification is needed for analytical purposes, such as asking questions like "Which patients in my cohort received Nitrogen Mustard Analogues?", which Nitrogen Mustard Analogues is a group of drugs.    
+- In the same vein as above, at the data abstraction stage, an abstractor that needs to answer the question "Did this patient receive Nitrogen Mustard Analogues?" may use the same classification system to find the drugs belonging to this class for abstraction.  
 - Interoperability across consortia, including ASCO   
 
 <div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embeddedchart/3d1f8c31-94a6-415c-9c02-30c4eeaa923a" id="IUE0RFs4tbEX"></iframe></div>
