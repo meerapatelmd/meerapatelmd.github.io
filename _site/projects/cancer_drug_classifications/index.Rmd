@@ -1,0 +1,225 @@
+---
+title: "Cancer Drug Classifications"
+author: "Meera Y. Patel, M.D."
+output: 
+  html_document:
+    theme: flatly
+    highlight: kate  
+    toc: yes
+    number_sections: true
+    toc_depth: 3 
+    toc_float: 
+      collapsed: false  
+      smooth_scroll: false
+    code_folding: show #or hide
+    df_print: paged
+    fig_height: 5 
+    fig_width: 7 
+    fig_caption: true
+    dev: png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      cache = FALSE,
+                      cache.path = "cache/",
+                      child = NULL, #file/s to knit and then include,
+                      collapse = FALSE, #collapse all output into a single block,
+                      error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
+                      fig.align = "center", #left, right, center, or default
+                      include = TRUE, #include chunk?
+                      message = TRUE, #display code messages?
+                      tidy = TRUE, #tidy code 
+                      warning = TRUE, #include warnings?
+                      results = "markup"
+                        # "asis": passthrough results
+                        # "hide": do not display results 
+                        # "hold": put all results below all code
+                      )
+```
+  
+Last updated: `r Sys.Date()`  
+  
+## Introduction  
+
+Drug Classification Challenges:  
+
+- A Clinically relevant classification is needed for analytical purposes, such as asking questions like "Which patients in my cohort received Nitrogen Mustard Analogues?", which Nitrogen Mustard Analogues is a group of drugs.    
+- In the same vein as above, at the data abstraction stage, an abstractor that needs to answer the question "Did this patient receive Nitrogen Mustard Analogues?" may use the same classification system to find the drugs belonging to this class for abstraction.  
+- Interoperability across consortia, including ASCO   
+
+<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embeddedchart/3d1f8c31-94a6-415c-9c02-30c4eeaa923a" id="IUE0RFs4tbEX"></iframe></div>
+
+
+## Reingold-Tilford Tree Diagrams  
+
+### Antibody Drug Conjugates  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_ANTIBODY_DRUG_CONJUGATE_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_ANTIBODY_DRUG_CONJUGATE_with_siblings.html')
+```
+
+
+
+### Cellular Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CELLULAR_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CELLULAR_THERAPY_with_siblings.html')
+```
+
+
+
+### Checkpoint Inhibitors  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_CHECKPOINT_INHIBITOR_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_CHECKPOINT_INHIBITOR_with_siblings.html')
+```
+
+
+
+### Cytotoxic Chemotherapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CYTOTOXIC_CHEMOTHERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/CYTOTOXIC_CHEMOTHERAPY_with_siblings.html')
+```
+
+
+
+### Endocrine Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/ENDOCRINE_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/ENDOCRINE_THERAPY_with_siblings.html')
+```
+
+
+
+### Immunomodulators and Immunostimulants  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_IMMUNOMODULATOR_AND_IMMUNOSTIMULANTS_EXCLUDING_IMMUNOSUPPRESSANTS_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_IMMUNOMODULATOR_AND_IMMUNOSTIMULANTS_EXCLUDING_IMMUNOSUPPRESSANTS_with_siblings.html')
+```
+
+
+
+### Intravesicular Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/INTRAVESICULAR_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/INTRAVESICULAR_THERAPY_with_siblings.html')
+```
+
+
+
+### Monoclonal Antibody Targeted Therapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_MONOCLONAL_ANTIBODY_TARGETED_THERAPY_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_MONOCLONAL_ANTIBODY_TARGETED_THERAPY_with_siblings.html')
+```
+
+
+
+### Other Immunotherapy  
+
+
+#### Without Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_OTHER_without_siblings_2_to_2.html')
+```
+
+
+
+#### With Siblings  
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/IMMUNOTHERAPY_OTHER_with_siblings.html')
+```
+

@@ -1,0 +1,50 @@
+---
+title: "The HemOnc Ontology"
+author: "Meera Y. Patel, M.D."
+output: 
+  html_document:
+    theme: flatly
+    highlight: kate  
+    toc: yes
+    number_sections: true
+    toc_depth: 3 
+    toc_float: 
+      collapsed: false  
+      smooth_scroll: false
+    code_folding: show #or hide
+    df_print: paged
+    fig_height: 5 
+    fig_width: 7 
+    fig_caption: true
+    dev: png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      cache = FALSE,
+                      cache.path = "cache/",
+                      child = NULL, #file/s to knit and then include,
+                      collapse = FALSE, #collapse all output into a single block,
+                      error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
+                      fig.align = "center", #left, right, center, or default
+                      include = TRUE, #include chunk?
+                      message = TRUE, #display code messages?
+                      tidy = TRUE, #tidy code 
+                      warning = TRUE, #include warnings?
+                      results = "markup"
+                        # "asis": passthrough results
+                        # "hide": do not display results 
+                        # "hold": put all results below all code
+                      )
+```
+  
+Last updated: `r Sys.Date()`  
+
+## Introduction  
+
+## Reingold-Tilford Tree Diagram 
+
+```{r,echo=FALSE}
+htmltools::includeHTML('widgets/HemOnc.html')
+```
