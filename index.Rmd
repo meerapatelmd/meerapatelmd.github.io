@@ -55,11 +55,9 @@ are particularly fun to click around.
 Feel free to contact me with any questions. 
 
 
-## Portfolio   
+## Projects  
 
-### Projects  
-
-#### The HemOnc Ontology {#the-hemonc-ontology}  
+### The HemOnc Ontology {#the-hemonc-ontology}  
 https://meerapatelmd.github.io/projects/hemonc_ontology/    
 HemOnc is an oncology drug ontology developed by Vanderbilt 
 University. The nodes and edges in this ontology closely 
@@ -68,7 +66,7 @@ treatments are applied in clinical practice. This project
 provides a brief introduction and visualization of the 
 taxonomy portion of the ontology.  
   
-#### Cancer Drug Classifications {#cancer-drug-classifications}   
+### Cancer Drug Classifications {#cancer-drug-classifications}   
 https://meerapatelmd.github.io/projects/cancer_drug_classifications/   
 Due to their inherent multifaceted nature, drugs can be classified in a
 multitude of ways for a given use case. For example, a pharmacist and a
@@ -81,16 +79,13 @@ cancer treatment data between institutions for situations such as transfer of
 care and automated identification of specific treatment lines and treatment
 history to optimize assessments for clinical trial eligibility.
 
-#### Clinical Data Quality Foundation {#clinical-data-quality-foundation}  
+### Clinical Data Quality Foundation {#clinical-data-quality-foundation}  
 https://meerapatelmd.github.io/clinicalDataQuality/  
-A report on the foundational clinical data quality principles   
+A report on the foundational clinical data quality principles 
 from which more complex data quality checks can be built.  
 
-### Presentations  
-
-### Research {#research}   
-
-#### A Novel Weighted Psychosocial Assessment Scoring System for Kidney Transplant Evaluation  
+## Presentations  
+### A Novel Weighted Psychosocial Assessment Scoring System for Kidney Transplant Evaluation  
 <https://meerapatelmd.github.io/projects/qualitative_kidney_transplant_study/poster.pdf>  
 Qualification for the organ transplant list requires clearance from a social
 workers that assesses that patient's social determinants of health and other
