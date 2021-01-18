@@ -7,13 +7,7 @@ output:
     css: style.css
     theme: flatly
     highlight: kate  
-    toc: yes
-    number_sections: true
-    toc_depth: 3 
-    toc_float: 
-      collapsed: false  
-      smooth_scroll: false
-    code_folding: show #or hide
+    code_folding: hide
     df_print: paged
     fig_height: 5 
     fig_width: 7 
@@ -30,7 +24,7 @@ knitr::opts_chunk$set(comment = "##",
                       echo = TRUE,
                       eval = TRUE,
                       cache = TRUE,
-                      cache.path = "reports/cache/",
+                      cache.path = "cache/",
                       child = NULL, #file/s to knit and then include,
                       collapse = FALSE, #collapse all output into a single block,
                       error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
@@ -40,7 +34,7 @@ knitr::opts_chunk$set(comment = "##",
                       fig.asp=0.50, #adds whitespace around images
                       include = TRUE, #include chunk?
                       message = FALSE, #display code messages?
-                      tidy = TRUE, #tidy code 
+                      tidy = FALSE, #tidy code 
                       warning = FALSE, #include warnings?
                       results = "markup"
                         # "asis": passthrough results
@@ -268,4 +262,92 @@ ggplot(data =
             position = position_stack(vjust = 0.5))
 ```
 
-I also want to see the distribution of study length from start to completion by phase. This would translate into the length of time a given study would be in the Platypus portfolio as it is being monitored for medical review.
+I also want to see the distribution of study length from start to completion by
+phase. This would translate into the length of time a given study would be in
+the Platypus portfolio as it is being monitored for medical review.  
+
+```{r}
+ggplot(data =
+         takeda_studies2 %>%
+         mutate(phase = coalesce(phase, study_type)) %>%
+        mutate(phase = factor(phase,
+                              levels = c("Phase 1",
+                                         "Phase 1/Phase 2",
+                                         "Phase 2",
+                                         "Phase 2/Phase 3",
+                                         "Phase 3",
+                                         "Phase 4",
+                                         "Observational",
+                                         "Observational [Patient Registry]",
+                                         "Expanded Access",
+                                         "N/A"))) %>%
+        mutate(study_type = factor(study_type,
+                                   levels =
+                                     c("Interventional",
+                                       "Observational",
+                                       "Observational [Patient Registry]",
+                                       "Expanded Access"))) %>%
+         filter(overall_status %in% c("Completed")) %>%
+         mutate(years_to_complete = (as.numeric(difftime(completion_date,
+                                             start_date,
+                                             units = "weeks")))/52) %>%
+         distinct(Phase = phase,
+                  `Study Type` = study_type,
+                  `Years to Completion` = years_to_complete),
+       mapping = aes(x = Phase,
+                     y = `Years to Completion`,
+                     group = Phase,
+                     fill = `Study Type`)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Takeda Completed Investigational Studies by Year",
+       y = "Years to Completion") +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_text(angle = 30,size = 3.5),
+        legend.position = "right")
+```
+
+Since the study time length is a common topic of discussion, 
+the analysis above is repeated with all completed studies in 
+the AACT database that started on or after 01-01-1990.  
+
+```{r,results='hide',echo=FALSE}
+conn <- local_connect("aact")
+all_data <-
+  query(conn = conn,
+        sql_statement =
+          "SELECT DISTINCT nct_id, phase, study_type, start_date, completion_date
+        FROM ctgov.studies
+        WHERE overall_status = 'Completed'
+        AND study_type = 'Interventional'")
+dc(conn = conn)
+```
+
+```{r}
+ggplot(data =
+         all_data %>%
+         filter(start_date > as.Date("1990-01-01")) %>%
+         filter(completion_date > start_date) %>%
+         mutate(years_to_complete = (as.numeric(difftime(completion_date,
+                                                         start_date,
+                                                         units = "weeks")))/52) %>%
+         mutate(phase = coalesce(phase, study_type)) %>%
+         rubix::filter_at_grepl(col = phase,
+                                grepl_phrase = "^Phase") %>%
+         distinct(nct_id,
+                  Phase = phase, 
+                  `Years to Completion` = years_to_complete,
+                  `Study Type` = study_type),
+       mapping = aes(x = Phase,
+                     y = `Years to Completion`,
+                     group = Phase,
+                     fill = Phase)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "All Completed Investigational Studies in AACT that Began After 01-01-1990",
+       y = "Years to Complete") +
+  scale_fill_brewer(palette = "Set2") +
+  theme(axis.text.x = element_text(angle = 30, size = 3.5),
+        legend.position = "bottom")
+```
+
