@@ -1,0 +1,120 @@
+---
+title: "Analysis of Takeda's Studies in the AACT Database"
+author: "Meera Y. Patel, M.D."
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    css: style.css
+    theme: flatly
+    highlight: kate  
+    toc: yes
+    number_sections: true
+    toc_depth: 3 
+    toc_float: 
+      collapsed: false  
+      smooth_scroll: false
+    code_folding: show #or hide
+    df_print: paged
+    fig_height: 5 
+    fig_width: 7 
+    fig_caption: true
+    dev: png
+    includes:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "##",
+                      tidy = TRUE, #`styler` to use styler:style_text() to reformat code
+                      tidy.opts = list(blank = FALSE, width.cutoff = 60),
+                      echo = TRUE,
+                      eval = TRUE,
+                      cache = TRUE,
+                      cache.path = "reports/cache/",
+                      child = NULL, #file/s to knit and then include,
+                      collapse = FALSE, #collapse all output into a single block,
+                      error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
+                      fig.align = "center", #left, right, center, or default
+                      fig.width = 7, #inches
+                      fig.height = 7, #inches
+                      fig.asp=0.50, #adds whitespace around images
+                      include = TRUE, #include chunk?
+                      message = FALSE, #display code messages?
+                      tidy = TRUE, #tidy code 
+                      warning = FALSE, #include warnings?
+                      results = "markup"
+                        # "asis": passthrough results
+                        # "hide": do not display results 
+                        # "hold": put all results below all code
+                      )
+```
+
+The AACT database available through ClinicalTrials.gov is used 
+for this analysis. Version 2021-01-17 is used for this analysis.  
+
+```{r,results='hide'}
+library(tidyverse)
+library(pg13)
+library(ggplot2)
+```
+
+Clinical Trials associated with Takeda are queried by 
+searching for the phrase “Takeda” in the "acronym", "brief_title",
+"official_title", "source", "limitations_and_caveats", "why_stopped", 
+"ipd_access_criteria", "ipd_url", and "plan_to_share_ipd_description" 
+fields in the CTGOV.STUDIES Table.  
+
+```{r,results='hide'}
+conn <- local_connect("aact")
+
+studies_fields <-
+ls_fields(conn = conn,
+          schema = "ctgov",
+          table = "studies")
+
+takeda_studies <- list()
+for (i in seq_along(studies_fields)) {
+  studies_field <- studies_fields[i]
+  sql_statement <-
+  SqlRender::render(
+    "SELECT *
+    FROM ctgov.studies s
+    WHERE LOWER(s.@studies_field::varchar) LIKE LOWER('%Takeda%')",
+    studies_field = studies_field
+  )
+  takeda_studies[[i]] <-
+    query(conn = conn,
+          sql_statement = sql_statement)
+  names(takeda_studies)[i] <- studies_field
+}
+
+dc(conn = conn)
+
+takeda_studies2 <-
+  takeda_studies %>%
+  bind_rows() %>%
+  distinct()
+```
+
+The "overall_status" describes the stage of a trial's execution 
+and provides a glimpse into the overall clinical trial activity 
+at Takeda.  
+
+```{r}
+ggplot(data =
+         takeda_studies2 %>%
+           count(overall_status) %>%
+           rename(`Overall Status` = overall_status,
+                  Count = n),
+      mapping = aes(x = `Overall Status`,
+                    y = Count,
+                    fill = `Overall Status`,
+                    label = Count)) +
+  geom_col() +
+  theme_minimal() +
+  labs(title = "Takeda Studies Across all Phases") +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_blank())
+```
+
+
