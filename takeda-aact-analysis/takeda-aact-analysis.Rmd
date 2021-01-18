@@ -114,7 +114,158 @@ ggplot(data =
   theme_minimal() +
   labs(title = "Takeda Studies Across all Phases") +
   scale_fill_brewer(palette = "Paired") +
-  theme(axis.text.x = element_blank())
+  theme(axis.text.x = element_blank()) +
+  geom_text(aes(label=Count), vjust=-0.2, color="black", size=3.5)
 ```
 
+“Active Statuses” are statuses that are potential targets 
+for ongoing data cleaning efforts before the study is closed 
+and the database is locked. Here, it is arbitrarily defined 
+as those with overall status of “Active, not recruiting”, 
+“Available”, and “Recruiting”.  
 
+The total actual or anticipated enrollment 
+is calculated For all studies that are active according to the 
+definition above. This calculation gives an idea of the total 
+number of patients that are covered by a data visualization 
+tool like Platypus.  
+
+```{r}
+active_statuses <- c("Active, not recruiting",
+                     "Available",
+                     "Recruiting")
+
+takeda_studies3 <-
+  takeda_studies2 %>%
+  filter(overall_status %in% active_statuses)
+
+ggplot(data =
+         takeda_studies3 %>%
+         filter(!is.na(enrollment_type)) %>%
+         group_by(enrollment_type) %>%
+         summarize(total = sum(enrollment)) %>%
+         rename(`Enrollment Type` = enrollment_type,
+                `Total` = total),
+       mapping = aes(x = `Enrollment Type`,
+                     y = Total,
+                     fill = `Enrollment Type`,
+                     label = Total)) +
+  geom_col() +
+  theme_minimal() +
+  labs(title = "Takeda Active Studies Enrollment") +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_blank()) +
+  geom_text(aes(label=Total), vjust=-0.2, color="black", size=3.5)
+```
+
+Since each study can be in various phases, which would require 
+different degree of medical review, the active studies are further 
+broken down by phase. Non-interventional studies are summarized 
+by subtypes “Observational”, "Observational [Patient Registry]",
+and “Expanded Access”.
+
+```{r}
+takeda_studies4 <-
+  takeda_studies3 %>%
+  mutate(phase = coalesce(phase, study_type)) %>%
+  mutate(phase = factor(phase,
+                        levels = c("Phase 1",
+                                   "Phase 1/Phase 2",
+                                   "Phase 2",
+                                   "Phase 2/Phase 3",
+                                   "Phase 3",
+                                   "Phase 4",
+                                   "Observational",
+                                   "Observational [Patient Registry]",
+                                   "Expanded Access"))) %>%
+  mutate(study_type = factor(study_type,
+                             levels =
+                               c("Interventional",
+                                 "Observational",
+                                 "Observational [Patient Registry]",
+                                 "Expanded Access")))
+
+ggplot(data =
+         takeda_studies4 %>%
+         group_by(phase) %>%
+         mutate(n = length(phase)) %>%
+         ungroup() %>%
+         distinct(Phase = phase,
+                Count = n,
+                `Study Type` = study_type),
+       mapping = aes(x = Phase,
+                     y = Count,
+                     fill = `Study Type`,
+                     label = Count)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Takeda Active Studies by Study Type and Phase") +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_text(angle = 30, size = 5)) +
+  geom_text(color="black", size=3.5, vjust=-0.1)
+```
+
+Since each new study could mean a new Platypus project, the 
+total number of new studies by year, grouped by phase, are calculated.  
+
+```{r}
+ggplot(data =
+         takeda_studies4 %>%
+         rubix::filter_at_grepl(col = phase,
+                                grepl_phrase = "Phase",
+                                ignore.case = FALSE) %>%
+         mutate(start_year = lubridate::year(start_date)) %>%
+         group_by(phase,start_year) %>%
+         mutate(n = length(phase)) %>%
+         ungroup() %>%
+         distinct(Phase = phase,
+                `Start Year` = start_year,
+                Count = n),
+       mapping = aes(x = `Start Year`,
+                     y = Count,
+                     fill = Phase,
+                     label = Count)) +
+  geom_col() +
+  theme_minimal() +
+  labs(title = "Takeda New Active Investigational Studies by Year") +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_text(angle = 30),
+        legend.position = "bottom") +
+  geom_text(size = 2, 
+            position = position_stack(vjust = 0.5))
+```
+
+Conversely, each completed study could mean either a bump in 
+workload (activities to close a database) and/or a removal of 
+a project from the Platypus portfolio. The number of completed 
+studies by year, grouped by phase, is calculated.  
+
+```{r}
+ggplot(data =
+         takeda_studies2 %>%
+         rubix::filter_at_grepl(col = phase,
+                                grepl_phrase = "Phase",
+                                ignore.case = FALSE) %>%
+         filter(overall_status %in% c("Completed")) %>%
+         mutate(completion_year = lubridate::year(completion_date)) %>%
+         group_by(phase,completion_year) %>%
+         mutate(n = length(phase)) %>%
+         ungroup() %>%
+         distinct(Phase = phase,
+                `Completion Year` = completion_year,
+                Count = n),
+       mapping = aes(x = `Completion Year`,
+                     y = Count,
+                     fill = Phase,
+                     label = Count)) +
+  geom_col() +
+  theme_minimal() +
+  labs(title = "Takeda Completed Investigational Studies by Year") +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_text(angle = 30),
+        legend.position = "bottom")  +
+  geom_text(size = 2, 
+            position = position_stack(vjust = 0.5))
+```
+
+I also want to see the distribution of study length from start to completion by phase. This would translate into the length of time a given study would be in the Platypus portfolio as it is being monitored for medical review.
