@@ -1,0 +1,84 @@
+---
+title: "Review OMOP Genomic Knowledge Representation"
+author: "Meera Y. Patel, M.D."
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    css: style.css
+    theme: flatly
+    highlight: kate  
+    toc: yes
+    number_sections: true
+    toc_depth: 3 
+    toc_float: 
+      collapsed: false  
+      smooth_scroll: false
+    code_folding: show #or hide
+    df_print: paged
+    fig_height: 5 
+    fig_width: 7 
+    fig_caption: true
+    dev: png
+    includes:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "##",
+                      tidy = TRUE, #`styler` to use styler:style_text() to reformat code
+                      tidy.opts = list(blank = FALSE, width.cutoff = 60),
+                      echo = TRUE,
+                      eval = TRUE,
+                      cache = TRUE,
+                      cache.path = "reports/cache/",
+                      child = NULL, #file/s to knit and then include,
+                      collapse = FALSE, #collapse all output into a single block,
+                      error = TRUE, #display error messages in doc. FALSE stops render when error is thrown
+                      fig.align = "center", #left, right, center, or default
+                      fig.width = 7, #inches
+                      fig.height = 7, #inches
+                      fig.asp=0.50, #adds whitespace around images
+                      include = TRUE, #include chunk?
+                      message = TRUE, #display code messages?
+                      tidy = TRUE, #tidy code 
+                      warning = TRUE, #include warnings?
+                      results = "markup"
+                        # "asis": passthrough results
+                        # "hide": do not display results 
+                        # "hold": put all results below all code
+                      )
+```
+  
+  
+This is a review of how the Genomic concepts are represented in 
+the OMOP Vocabularies.  
+
+```{r}
+library(tidyverse)
+library(chariot)
+```
+
+```{r}
+queryAthena("SELECT DISTINCT 
+                vocabulary_id,
+                concept_class_id 
+           FROM omop_vocabulary.concept 
+           WHERE concept_class_id IN ('Variant', 'Gene') 
+           ORDER BY vocabulary_id;")
+```
+
+```{r}
+queryAthena("
+            SELECT DISTINCT cr.relationship_id, c2.vocabulary_id, c2.concept_class_id 
+            FROM omop_vocabulary.concept c 
+            INNER JOIN omop_vocabulary.concept_relationship cr 
+            ON cr.concept_id_1 = c.concept_id 
+            INNER JOIN omop_vocabulary.concept c2 
+            ON cr.concept_id_2 = c2.concept_id 
+            WHERE c.vocabulary_id IN ('HGNC')
+              AND c.invalid_reason IS NULL 
+              AND cr.invalid_reason IS NULL 
+              AND c2.invalid_reason IS NULL;
+            ")
+```
+

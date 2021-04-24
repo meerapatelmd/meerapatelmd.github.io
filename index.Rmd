@@ -37,7 +37,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       )
 ```
   
-Last updated: `r Sys.Date()`  
+**Last Updated**: `r Sys.time()`  
+**Back to GitHub Profile**: https://github.com/meerapatelmd  
 
 ## About Me  
 
