@@ -55,6 +55,7 @@ are particularly fun to click around.
 
 Feel free to contact me with any questions. 
 
+<br>
 
 ## Projects  
 
@@ -84,6 +85,8 @@ history to optimize assessments for clinical trial eligibility.
 https://meerapatelmd.github.io/clinicalDataQuality/  
 A report on the foundational clinical data quality principles 
 from which more complex data quality checks can be built.  
+
+<br>  
 
 ## Presentations  
 ### A Novel Weighted Psychosocial Assessment Scoring System for Kidney Transplant Evaluation  
